@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 assignment</title>
+  <script>
+    const showProducts = () => {
+      const button = document.getElementById('products-button');
+      
+      fetch('/api/v1/products')
+      .then((result) => result.json())
+      .then((data) => {
+
+        if(data.length > 0) {
+          const parentDiv = document.createElement('div');
+          data.forEach((product) => {
+
+            const titleHeader = document.createElement('h2');
+            titleHeader.innerText = `ID#${product.id} - ${product.name}`;
+
+            const descElement = document.createElement('p');
+            descElement.innerText = `Description: ${product.desc}`;
+
+            const priceElement = document.createElement('p');
+            priceElement.innerText = `Price: $${product.price}`;
+
+            parentDiv.appendChild(titleHeader);
+            parentDiv.appendChild(descElement);
+            parentDiv.appendChild(priceElement);
+          })
+          document.body.appendChild(parentDiv);
+          button.disabled = true;
+        }
+
+      })
+    }
+  </script>
+</head>
+<body>
+  <h1>Products</h1>
+
+  <button onclick="showProducts()" id="products-button">Show the products</button>
+
+</body>
+</html>
