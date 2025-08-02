@@ -16,7 +16,7 @@ app.get('/api/v1/products/:productID', (req, res) => {
   const idToFind = parseInt(req.params.productID);
   const product = products.find((p) => p.id === idToFind);
   if(product) {
-    res.json(product);
+    return res.json(product);
   }
   res.json({ message: "That product was not found." });  
 })
