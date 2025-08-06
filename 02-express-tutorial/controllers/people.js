@@ -31,6 +31,10 @@ const editPersonById = (req, res) => {
   const id = parseInt(req.params.id);
   const nameToEdit = req.body.name;
 
+  if(!nameToEdit) {
+    return res.status(400).json({ success: false, message: `Name to edit not found.`})
+  }
+
   const targetPerson = people.find((person) => {
     return person.id === id;
   });
